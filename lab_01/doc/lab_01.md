@@ -24,18 +24,91 @@
 Интернет-магазин VTB_MINI_STORE хочет скорить клиентов по некоторому рейтингу для дальнейшего построения индивидуальной программы лояльности для каждого пользователя. На вход подается массив ```std::vector<User>``` объектов класса ```User```, содержащего поля ```std::string name``` и ```int score``` -- имя и рейтинг пользователя, соответственно. Нужно отсортировать данный массив по значениям ```score``` (по возрастанию) и вывести результат. 
 
 #### Выбор и оценка алгоритма
-```math
-  \omega = \int_a^b x dx
-```
+Оптимальным будет использование быстрой сортировки с выбором опорного элемента по схеме Хоара. 
+
 #### Реализация алгоритма
 
 ```C++
-
+  void quick_sort(vector<User> &a, int first, int last)
+  {
+  
+      int i = first, j = last;
+      User x = a[(first + last) / 2];
+  
+      do
+      {
+          while (a[i].GetScore() < x.GetScore())
+              i++;
+          while (a[j].GetScore() > x.GetScore())
+              j--;
+  
+          if (i <= j)
+          {
+              if (i < j)
+              {
+                  User tmp = a[i];
+                  a[i] = a[j];
+                  a[j] = tmp;
+              }
+              i++;
+              j--;
+          }
+      } while (i <= j);
+  
+      if (i < last)
+          quick_sort(a, i, last);
+      if (first < j)
+          quick_sort(a, first, j);
+  }
 ```
 ### Результат
 
-``` console
-  ```
+  ``` console
+  Input:            |   Output:
+  _____________________________________
+  
+  Ibrahim:    239   |   Olga:         4
+  Peter:      239   |   Paul:        24
+  Fatima:     130   |   Hassan:      29
+  Aleksandr:   86   |   Ling:        32
+  Richard:    753   |   Aleksandr:   86
+  Xin:        212   |   Ping:       107
+  Bin:        270   |   Fatima:     130
+  Paul:        24   |   Ming:       148
+  Ping:       107   |   Sergey:     154
+  Lin:        826   |   Martin:     170
+  Olga:         4   |   William:    172
+  Sri:        923   |   Xin:        212
+  Pedro:      362   |   Samuel:     229
+  William:    172   |   Ibrahim:    239
+  Rosa:       256   |   Peter:      239
+  Thomas:     482   |   Rosa:       256
+  Jorge:      677   |   Bin:        270
+  Yong:       640   |   Victor:     285
+  Elizabeth:  907   |   Siti:       335
+  Sergey:     154   |   Pedro:      362
+  Ram:        375   |   Ram:        375
+  Hassan:      29   |   Sarah:      417
+  Anita:      765   |   Emmanuel:   432
+  Manuel:     458   |   Manuel:     458
+  Victor:     285   |   Mario:      459
+  Sandra:     475   |   Sandra:     475
+  Ming:       148   |   Thomas:     482
+  Siti:       335   |   Miguel:     541
+  Miguel:     541   |   Rita:       615
+  Emmanuel:   432   |   Yong:       640
+  Samuel:     229   |   Jorge:      677
+  Ling:        32   |   Richard:    753
+  Charles:    904   |   Anita:      765
+  Sarah:      417   |   Lin:        826
+  Mario:      459   |   Joao:       864
+  Joao:       864   |   Svetlana:   897
+  Tatyana:    962   |   Charles:    904
+  Mark:       951   |   Elizabeth:  907
+  Rita:       615   |   Sri:        923
+  Martin:     170   |   Mark:       951
+  Svetlana:   897   |   Tatyana:    962
+```
 
 ### 2. Алгоритм сотрировки 2
   2.1. Сформулировать задачу, для которой требуется применение алгоритма сортировки. Алгоритм сортировки 2 должен отличаться от алгоритма сортировки 1 Асимтотическая сложность алгоритма 2 должна быть больше, чем у алгоритма 1
@@ -78,50 +151,51 @@
 ### Результат
 
 ```console
-  Input:          |   Output:       
-  _________________________________
+  Input:            |   Output:
+  _____________________________________
   
-  Ibrahim:    2   |   Richard:    0 
-  Peter:      6   |   Ping:       0 
-  Fatima:     9   |   Rosa:       0 
-  Aleksandr:  7   |   Elizabeth:  0 
-  Richard:    0   |   Manuel:     0 
-  Xin:        5   |   Victor:     0 
-  Bin:        2   |   Mark:       0 
-  Paul:       6   |   Martin:     0 
-  Ping:       0   |   Sergey:     1 
-  Lin:        6   |   Ibrahim:    2
-  Olga:       8   |   Bin:        2
-  Sri:        7   |   Thomas:     2
-  Pedro:      5   |   Ling:       2
-  William:    8   |   Mario:      2
-  Rosa:       0   |   Joao:       2
-  Thomas:     2   |   Ram:        4
-  Jorge:      9   |   Anita:      4
-  Yong:       8   |   Miguel:     4
-  Elizabeth:  0   |   Samuel:     4
-  Sergey:     1   |   Tatyana:    4
-  Ram:        4   |   Xin:        5
-  Hassan:     8   |   Pedro:      5
-  Anita:      4   |   Charles:    5
-  Manuel:     0   |   Peter:      6
-  Victor:     0   |   Paul:       6
-  Sandra:     8   |   Lin:        6
-  Ming:       9   |   Svetlana:   6
-  Siti:       7   |   Aleksandr:  7
-  Miguel:     4   |   Sri:        7
-  Emmanuel:   7   |   Siti:       7
-  Samuel:     4   |   Emmanuel:   7
-  Ling:       2   |   Olga:       8
-  Charles:    5   |   William:    8
-  Sarah:      9   |   Yong:       8
-  Mario:      2   |   Hassan:     8
-  Joao:       2   |   Sandra:     8
-  Tatyana:    4   |   Fatima:     9
-  Mark:       0   |   Jorge:      9
-  Rita:       9   |   Ming:       9
-  Martin:     0   |   Sarah:      9
-  Svetlana:   6   |   Rita:       9
+  Ibrahim:      4   |   Xin:          0
+  Peter:        7   |   Sergey:       0
+  Fatima:       2   |   Anita:        0
+  Aleksandr:    6   |   Samuel:       0
+  Richard:      9   |   Joao:         0
+  Xin:          0   |   Rosa:         1
+  Bin:          8   |   Jorge:        1
+  Paul:         8   |   Victor:       1
+  Ping:         6   |   Ling:         1
+  Lin:          8   |   Fatima:       2
+  Olga:         2   |   Olga:         2
+  Sri:          4   |   Siti:         2
+  Pedro:        5   |   Sarah:        2
+  William:      7   |   Thomas:       3
+  Rosa:         1   |   Elizabeth:    3
+  Thomas:       3   |   Ming:         3
+  Jorge:        1   |   Mario:        3
+  Yong:         8   |   Tatyana:      3
+  Elizabeth:    3   |   Ibrahim:      4
+  Sergey:       0   |   Sri:          4
+  Ram:          7   |   Charles:      4
+  Hassan:       9   |   Martin:       4
+  Anita:        0   |   Pedro:        5
+  Manuel:       8   |   Emmanuel:     5
+  Victor:       1   |   Aleksandr:    6
+  Sandra:       7   |   Ping:         6
+  Ming:         3   |   Mark:         6
+  Siti:         2   |   Peter:        7
+  Miguel:       7   |   William:      7
+  Emmanuel:     5   |   Ram:          7
+  Samuel:       0   |   Sandra:       7
+  Ling:         1   |   Miguel:       7
+  Charles:      4   |   Bin:          8
+  Sarah:        2   |   Paul:         8
+  Mario:        3   |   Lin:          8
+  Joao:         0   |   Yong:         8
+  Tatyana:      3   |   Manuel:       8
+  Mark:         6   |   Richard:      9
+  Rita:         9   |   Hassan:       9
+  Martin:       4   |   Rita:         9
+  Svetlana:     9   |   Svetlana:     9
 ```
 
 ## Вывод
+Я познакомился с алгоритмами сортивки и способами оценки их эффективности (по времени и по памяти) в терминологии $О$-символики, вспомнил, как работать с классами и шаблоном ```vector<t>``` в C++. В обоих случаях были реализованы устойчивые сортировки.
