@@ -24,8 +24,10 @@
 Интернет-магазин VTB_MINI_STORE хочет скорить клиентов по некоторому рейтингу для дальнейшего построения индивидуальной программы лояльности для каждого пользователя. На вход подается массив ```std::vector<User>``` объектов класса ```User```, содержащего поля ```std::string name``` и ```int score``` -- имя и рейтинг пользователя, соответственно. Нужно отсортировать данный массив по значениям ```score``` (по возрастанию) и вывести результат. 
 
 #### Выбор и оценка алгоритма
-    
-#### Реализация
+```math
+  \omega = \int_a^b x dx
+```
+#### Реализация алгоритма
 
 ```C++
 
@@ -33,8 +35,7 @@
 ### Результат
 
 ``` console
-
-```
+  ```
 
 ### 2. Алгоритм сотрировки 2
   2.1. Сформулировать задачу, для которой требуется применение алгоритма сортировки. Алгоритм сортировки 2 должен отличаться от алгоритма сортировки 1 Асимтотическая сложность алгоритма 2 должна быть больше, чем у алгоритма 1
@@ -50,15 +51,76 @@
     
 #### Выбор и оценка алгоритма
 
-#### Реализация
+#### Реализация алгоритма
 
 ```C++
-
+  vector<User> countable_sort(vector<User> data, int num_of_levels)
+  {
+      vector<User> freq[num_of_levels];
+      vector<User> sorted_data;
+  
+      for (User user : data)
+      {
+          freq[user.GetScore()].push_back(user);
+      }
+  
+      for (vector<User> vec : freq)
+      {
+          for (User user : vec)
+          {
+              sorted_data.push_back(user);
+          }
+      }
+      return sorted_data;
+  };
 ```
 ### Результат
 
 ```console
-
+  Input:          |   Output:       
+  _________________________________
+  
+  Ibrahim:    2   |   Richard:    0 
+  Peter:      6   |   Ping:       0 
+  Fatima:     9   |   Rosa:       0 
+  Aleksandr:  7   |   Elizabeth:  0 
+  Richard:    0   |   Manuel:     0 
+  Xin:        5   |   Victor:     0 
+  Bin:        2   |   Mark:       0 
+  Paul:       6   |   Martin:     0 
+  Ping:       0   |   Sergey:     1 
+  Lin:        6   |   Ibrahim:    2
+  Olga:       8   |   Bin:        2
+  Sri:        7   |   Thomas:     2
+  Pedro:      5   |   Ling:       2
+  William:    8   |   Mario:      2
+  Rosa:       0   |   Joao:       2
+  Thomas:     2   |   Ram:        4
+  Jorge:      9   |   Anita:      4
+  Yong:       8   |   Miguel:     4
+  Elizabeth:  0   |   Samuel:     4
+  Sergey:     1   |   Tatyana:    4
+  Ram:        4   |   Xin:        5
+  Hassan:     8   |   Pedro:      5
+  Anita:      4   |   Charles:    5
+  Manuel:     0   |   Peter:      6
+  Victor:     0   |   Paul:       6
+  Sandra:     8   |   Lin:        6
+  Ming:       9   |   Svetlana:   6
+  Siti:       7   |   Aleksandr:  7
+  Miguel:     4   |   Sri:        7
+  Emmanuel:   7   |   Siti:       7
+  Samuel:     4   |   Emmanuel:   7
+  Ling:       2   |   Olga:       8
+  Charles:    5   |   William:    8
+  Sarah:      9   |   Yong:       8
+  Mario:      2   |   Hassan:     8
+  Joao:       2   |   Sandra:     8
+  Tatyana:    4   |   Fatima:     9
+  Mark:       0   |   Jorge:      9
+  Rita:       9   |   Ming:       9
+  Martin:     0   |   Sarah:      9
+  Svetlana:   6   |   Rita:       9
 ```
 
 ## Вывод
