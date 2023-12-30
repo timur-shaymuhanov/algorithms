@@ -45,7 +45,7 @@
 
 #### Модель города
 
-![My Image](https://github.com/timur-shaymuhanov/algorithms/blob/1840b46d183c1fc6cfaa868307f42c92d6d4c514/lab_03/doc/city_graph.jpg)
+![My Image](https://github.com/timur-shaymuhanov/algorithms/blob/316d148cc68e4fc7a2ebb8a321427a15164ddd0f/lab_03/doc/city_graph2.jpg)
 
 
 Город описывается классом Model(nx.DiGraph), который наследует направленному графу из библиотеки NetworkX. Мы строим его 'по модели Манхеттена', то есть используя ```nx.2d_grid_graph()``` и затем случайным образом задавая направления улиц. В этом графе вершины соответствуют перекресткам, а ребра -- улицам.
